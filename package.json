@@ -1,0 +1,15 @@
+{
+  "name": "knexjs",
+  "version": "1.0.0",
+  "description": "Knex.js project to understand more about query builders",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "victorsouza19",
+  "license": "ISC",
+  "dependencies": {
+    "knex": "^0.95.14",
+    "mysql2": "^2.3.3-rc.0"
+  }
+}
