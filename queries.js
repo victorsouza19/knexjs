@@ -91,10 +91,20 @@ database.where({id: 8}).delete().table("games").then(data => {
 
 
 /* Update */
-database.where({id: 4}).update({name: "Minecraft 2", price: 0.99}).table("games").then(data => {
+database.where({id: 4}).update({name: "Minecraft 2", price: 1.99}).table("games").then(data => {
   console.log(data);
 
 }).catch(err => {
   console.log(err);
 
 });
+
+/* Order By */
+database.select().table("games").orderBy("price", "desc").then(data => {
+  console.log(data);
+}).catch(err => {
+  console.log(err);
+});
+
+/* table 1:1 */
+
