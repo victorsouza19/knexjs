@@ -19,8 +19,6 @@ let data = [
   }
 ]; 
 
-
-
 /* INSERT */
 database.insert(data).into("games").then(data => {
   console.log(data);
@@ -182,3 +180,40 @@ database.select([
 }).catch(err => {
   console.log(err);
 });
+
+/* n:n Associated select */
+
+database.select([
+  "studios.name as studio",
+  "games.name as game",
+  "games.price as price"
+])
+.table("games_studios")
+  .innerJoin("games", "games.id", "games_studios.game_id")
+  .innerJoin("studios", "studios.id", "games_studios.id")
+.then(data => {
+  console.log(data);
+}).catch(err => {
+  console.log(err);
+});
+
+/* Transactions */
+
+async function transaction(){
+  try {
+    await database.transaction(async trans => {
+
+      await database.insert({name: "Blizzard"}).table("studios");
+      await database.insert({name: "Ubisoft"}).table("studios");
+      await database.insert({name: "EA Games"}).table("studios");
+      await database.insert({name: "Nintendo"}).table("studios");
+      await database.insert({name: "Valve Corporation"}).table("studios");
+      await database.insert({name: "Naughty Dog Inc"}).table("studios");
+
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+transaction();
